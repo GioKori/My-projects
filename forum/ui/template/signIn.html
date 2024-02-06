@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../static/css/signup.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;700&family=Roboto+Mono:wght@200;400&display=swap" rel="stylesheet">
+        <title>Forum</title>
+    </head>
+    <body>
+
+        <!-- Background -->
+        <div class="bg"></div>
+        <div class="bg bg2"></div>
+        <div class="bg bg3"></div>
+        <!-- End of background -->
+
+        <!-- Navigation Menu -->
+        <header>
+            <div class="logo_reg">
+                <ul class="logo">
+                    <li onclick="location.href='./'" class="logo_link">Forum</li>
+                </ul>
+                <ul class="signs">
+                    <li onclick="location.href='./sign-in'" class="sign_link">Sign in</li>
+                    <li onclick="location.href='./sign-up'" class="sign_link">Sign up</li>
+                </ul>
+            </div>
+        </header>
+        <!-- End of Navigation Menu -->
+
+        <!-- Form for sing in -->
+        <form action="/sign-in" method="post" class="sign_in">
+            <div class="title">Sign In</div>
+            <div class="inputs_in">
+                <input class="textarea_signup" name="nickname" placeholder="Enter your nickname" type="text"></input>
+                <input class="textarea_signup" name="password" placeholder="Enter your password" type="password"></input>
+            </div>
+            <input class="signin_btn" type="submit" value="Sign In">
+        </form>
+        <footer>
+            <div class="authors">Development by Giorgi Koridze and Robert Juhkam</div>
+            <div class="year">2024</div>
+        </footer>
+        <!-- End of Form -->
+
+        <!-- JS Scripts -->
+        {{ if .Exist }}
+        <script>
+                alert('{{ .Content }}')
+        </script>
+        {{ end }}
+        <!-- End of Scripts -->
+    </body>
+</html>

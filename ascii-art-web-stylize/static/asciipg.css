@@ -1,0 +1,31 @@
+body{
+    margin: 0;
+    height: 100vh;
+    padding: 0;
+    background-image: url(./san_blas_panama_lost_paradise_7.jpg);
+    background-repeat:no-repeat;
+    background-size: cover;
+}
+
+h1 {
+    font-family: cursive;
+    color: blue;
+    display: flex;
+    justify-content: center;
+}
+
+#outputText {
+    display: flex;
+    margin-left: 5%;
+    width: 1000px;
+    height: 500px;
+}
+
+button {
+ align-items: center;
+ margin-left: 50%;
+ width: 50px;
+ color: rgb(0, 0, 0);
+ padding: 10px;
+ border-radius: 10px;
+}

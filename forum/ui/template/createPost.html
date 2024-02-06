@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../static/css/createPost.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;700&family=Roboto+Mono:wght@200;400&display=swap" rel="stylesheet">
+        <title>Forum</title>
+    </head>
+    <body>
+        <!-- Background -->
+        <div class="bg"></div>
+        <div class="bg bg2"></div>
+        <div class="bg bg3"></div>
+        <!-- End of Background -->
+
+        <!-- Navigation Menu -->
+        <header>
+            <div class="logo_reg">
+                <ul class="logo">
+                    <li onclick="location.href='/'" class="logo_link">Forum</li>
+                </ul>
+                <ul class="signs">
+                    <li class="profile_drop">
+                        <div class="dropbtn">{{ .Nickname }}</div>
+                        <div class="dropdown_content">
+                            <a href="./profile/{{.Nickname}}">Profile</a>
+                            <div class="exit">
+                                <a href="/logout">Log out<div class="exit_icon"></div></a>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </header>
+        <!-- End of Navigation Menu -->
+
+        <!-- Form for creating post -->
+        <form action="/create-post" method="post" class="create_area" id="post" onsubmit="return validation()">
+            <label class="title_label">Creating new post</label>
+            <label class="name_label">Title</label>
+            <input type="text" name="postTitle" class="name_textarea" required></input>
+            <label class="desc_label">Message</label>
+            <textarea name="postMessage" class="msg_textarea" required form="post"></textarea>
+            <div class="cat_container">
+                <label class="cat_label">Categories</label>
+                <div class="plus" onclick="addCat()">+</div>
+                <div class="minus" onclick="removeCat()">-</div>
+                <div class="error">Every category must be unique</div>
+            </div>
+            <div class="cat_container" id="cat_container">
+                <input id="cat" type="text" name="postCat" class="cat_textarea" required></input>
+            </div>
+            <input type="submit" class="submit" value="Create">
+        </form>
+        <!-- End of Form -->
+
+        <!-- Footer -->
+        <footer>
+            <div class="authors">Development by Giorgi Koridze</div>
+            <div class="year">2024</div>
+        </footer>
+        <!-- End of Footer -->
+
+        <!-- JS Scripts -->
+        <script>
+            // adding new category, limit to 8
+            const addCat = () => {
+                const cats = document.getElementById('cat_container')
+                if (cats.children.length < 9) {
+                    const cat = document.getElementById('cat')
+                    const clone = cat.cloneNode(true)
+                    clone.value = ''
+                    document.getElementById('cat_container').appendChild(clone)
+                }
+            }
+            
+            // removing category, limit to 1
+            const removeCat = () => {
+                const cats = document.getElementById('cat_container')
+                if (cats.children.length > 1) {
+                    cats.removeChild(cats.lastElementChild)
+                }
+            }
+
+            // checking of same categories and spaces in textareas
+            const form = document.querySelector('#post');
+            const cats = document.getElementsByClassName('cat_textarea')
+
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const classArr = [];
+                const err = document.getElementsByClassName('error')
+
+                for(let i = 0; i < cats.length; i++) {
+                    if(classArr.indexOf(cats[i].value) != -1) {
+                        err[0].style.display = 'block'
+                        setTimeout(()=>{
+                            err[0].style.display = 'none'
+                        }, 1500)
+                        return false;
+                    }
+                    else
+                        classArr.push(cats[i].value);
+                }
+                
+                const coms = document.forms[0]
+                for (let i = 0; i < coms.length; i++) {
+                    const com = coms.elements[i].value
+                    if (com.trim() === '' || com.trim === null) {
+                        alert('Fill all fields')
+                        return false
+                    }
+                }
+                form.submit();
+            });
+        </script>
+        <!-- End of Scripts -->
+    </body>
+</html>

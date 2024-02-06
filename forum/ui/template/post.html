@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../static/css/post.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;700&family=Roboto+Mono:wght@200;400&display=swap" rel="stylesheet">
+        <title>Forum</title>
+    </head>
+    <body>
+        <!-- Background -->
+        <div class="bg"></div>
+        <div class="bg bg2"></div>
+        <div class="bg bg3"></div>
+        <!-- End of Background -->
+        <!-- Navigation Menu -->
+        <header>
+            <div class="logo_reg">
+                <ul class="logo">
+                    <li onclick="location.href='/'" class="logo_link">Forum</li>
+                </ul>
+                <ul class="signs">
+                    {{ if .User.Nickname }}
+                    <li onclick="location.href='/create-post'" class="create_btn">Create post<div class="new_post_icon"></div></li>
+                    <li class="profile_drop">
+                        <div class="dropbtn">{{ .User.Nickname }}</div>
+                        <div class="dropdown_content">
+                            <a href="/profile/{{.User.Nickname}}">Profile</a>
+                            <div class="exit">
+                                <a href="/logout">Log out<div class="exit_icon"></div></a>
+                            </div>
+                        </div>
+                    </li>
+                    {{ else }}
+                    <li onclick="location.href='/sign-in'" class="sign_link">Sign in</li>
+                    <li onclick="location.href='/sign-up'" class="sign_link">Sign up</li>
+                    {{ end }}
+                </ul>
+            </div>
+        </header>
+        <!-- End of Navigation Menu -->
+        <!-- Post Area -->
+        <div class="post">
+            <div id="HASH" class="blue-msg">
+                <span id="author-HASH" >post</span>
+                <span class="ios-circle">author</span>
+                </div>
+            {{ if .Post }}
+            <div class="post_area">
+                <div class="title_author">
+                    <div class="title">{{ .Post.Title }}</div>
+                    <div class="author">{{ .Post.Author }}</div>
+                </div>
+                <div class="border"></div>
+                <div class="categories">
+                    {{ range .Post.Categories }}
+                    <div class="categorie">{{ . }}</div>
+                    {{ end }}
+                </div>
+                <div class="border"></div>
+                <div class="description">
+                    {{ .Post.Message }}
+                </div>
+            {{ end }}
+            </div>
+            {{ if .User.Nickname }}
+            <form class="btns" action="/post/like/{{ .Post.Id }}" method="post">
+                <input type="submit" name="postLikeBtn" value="1" class="like_btn"></input>
+                <div class="rating">{{ .Post.Like }}</div>
+                <input type="submit" name="postLikeBtn" value="-1" class="dislike_btn"></input>
+            </form>
+            {{ else }}
+            <div class="btns">
+                <div class="like_btn" onclick="notAllowed()"></div>
+                <div class="rating">{{ .Post.Like }}</div>
+                <div class="dislike_btn" onclick="notAllowed()"></div>
+            </div>
+            {{ end }}
+            {{ if .User.Nickname }}
+            <form action="/post/{{ .Post.Id }}" method="post" class="comment_area" onsubmit="return validation()">
+                Your comment
+                <textarea name ="comment" class="textarea_comment" rows="3" cols="50"></textarea>
+                <input class="submit_comment" type="submit" value="Submit">
+            </form>
+            {{ end }}
+            {{ if .User.Nickname }}
+            <div id="HASH">
+            <span>comment</span>
+        </div>
+                {{ range .Comments }}
+                <div class="comments">
+                    <div class="comment_author">{{ .Author }}</div>
+                    <div class="border"></div>
+                    <div class="comment">{{ .Content }}</div>
+                </div>
+                <form class="btns" action="/comment/like/{{ .Id }}" method="post">
+                    <input type="submit" name="commentLikeBtn" value="1" class="like_btn"></input>
+                    <div class="rating">{{ .Like }}</div>
+                    <input type="submit" name="commentLikeBtn" value="-1" class="dislike_btn"></input>
+                </form>
+                {{ end }}
+            {{ else }}
+                {{ range .Comments }}
+                <div class="comments">
+                    <div class="comment_author">{{ .Author }}</div>
+                    <div class="border"></div>
+                    <div class="comment">{{ .Content }}</div>
+                </div>
+                <div class="btns">
+                    <div class="like_btn" onclick="notAllowed()"></div>
+                    <div class="rating">{{ .Like }}</div>
+                    <div class="dislike_btn" onclick="notAllowed()"></div>
+                </div>
+                {{end}}
+            {{ end }}
+        </div>
+        <!-- End of Post Area -->
+        <!-- Footer -->
+        <footer>
+            <div class="authors">Development by Giorgi Koridze and Robert Juhkam</div>
+            <div class="year">2024</div>
+        </footer>
+        <!-- End of Footer -->
+        <!-- JS Scripts -->
+        <script>
+            // if unlogged user is using rating buttons
+            const notAllowed = () => {
+                alert('Sign in first!')
+            }
+            // checking of fill fields
+            const validation = () => {
+                let com = document.forms[1].elements[0].value
+                if (com.trim() === '' || com.trim === null) {
+                    alert('Fill comment')
+                    return false
+                }
+            }
+        </script>
+        <!-- End of Scripts -->
+    </body>
+</html>

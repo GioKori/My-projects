@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="static/index.css">
+    <title>Convert Your Text</title>
+</head>
+<body>
+    <h1>Ascii Art</h1>
+    <form method="POST" action="/ascii-art">
+        <textarea name="inputText" id="inputText" cols="48" rows="6" placeholder="Write your text here"></textarea>
+        <br>
+        <label for="font">Choose a font:</label>
+        <select name="font" id="font">
+            <option value="standard.txt">standard</option>
+            <option value="shadow.txt">shadow</option>
+            <option value="thinkertoy.txt">thinkertoy</option>
+        </select>
+        <button>Generate</button>
+    </form>
+</div>
+</body>
+</html>

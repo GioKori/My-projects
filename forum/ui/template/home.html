@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../static/css/home.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;700&family=Roboto+Mono:wght@200;400&display=swap" rel="stylesheet">
+        <title>Forum</title>
+    </head>
+    <body>
+
+        <!-- Background -->
+        <div class="bg"></div>
+        <div class="bg bg2"></div>
+        <div class="bg bg3"></div>
+        <!-- End of Background -->
+
+        <!-- Navigation Menu -->
+        <header>
+            <div class="logo_reg">
+                <ul class="logo">
+                    <li onclick="location.href='/'" class="logo_link">Forum</li>
+                </ul>
+                <ul class="signs">
+                    {{ if .User.Nickname }}
+                    <li onclick="location.href='/create-post'" class="create_btn">Create post<div class="new_post_icon"></div></li>
+                    <li class="profile_drop">
+                        <div class="dropbtn">{{ .User.Nickname }}</div>
+                        <div class="dropdown_content">
+                            <a href="./profile/{{.User.Nickname}}">Profile</a>
+                            <div class="exit">
+                            <a href="/logout">Log out<div class="exit_icon"></div></a>
+                        </div>
+                        </div>
+                    </li>
+                    {{ else }}
+                    <li onclick="location.href='./sign-in'" class="sign_link">Sign in</li>
+                    <li onclick="location.href='./sign-up'" class="sign_link">Sign up</li>
+                    {{ end }}
+                </ul>
+            </div>
+        </header>
+        <!-- End of Navigation menu -->
+
+        <!-- Search with categories -->
+        <form action="/" method="post" class="filter">
+            <div class="filter_title">Search for a category</div>
+            <div class="inputs">
+                <input type="text" name="catFilter" class="filter_text">
+                <input type="submit" class="filter_submit" value="Search">
+            </div>
+        </form>
+        <!-- End of Searching -->
+
+        <!-- Line for existing Posts -->
+        <div class="line">
+            <div id="HASH" class="blue-msg">
+                <span>post</span>
+                <span>author</span>
+                </div>
+            {{ if .Posts }}
+            {{ range .Posts }}
+            <div class="post">
+                <div class="title_author">
+                    <div onclick="location.href='./post/{{.Id}}'" class="title">{{ .Title }}</div>
+                    <div class="author">{{ .Author }}</div>
+                </div>
+                <div class="border"></div>
+                <div class="categories">
+                    {{ range .Categories }}
+                    <div class="categorie">{{ . }}</div>
+                    {{ end }}
+                </div>
+            </div>
+            {{ end }}
+            {{ else }}
+            <div class="post">No posts yet</div>
+            {{ end }}
+        </div>
+        <!-- End of Line -->
+
+        <!-- Footer -->
+        <footer>
+            <div class="authors">Development by Giorgi Koridze and Robert Juhkam</div>
+            <div class="year">2024</div>
+        </footer>
+        <!-- End of Footer -->
+    </body>
+</html>

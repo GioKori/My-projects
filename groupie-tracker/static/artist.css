@@ -1,0 +1,125 @@
+/* Reset some default browser styles */
+body {
+    margin: 0;
+    padding: 0;
+    background-color: maroon;
+    justify-content: center;
+    display: flexbox;
+}
+
+/* Style the header */
+.header {
+    background-color:rgb(88, 1, 1);
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 45px;
+
+}
+
+.button{
+    color: aliceblue;
+    border: 2px solid bisque;
+    background-color: burlywood;
+    border-radius: 50px;
+    justify-self:flex-end;
+    width: 90px;
+    height: 40px;
+    margin-right: 25px;
+    
+}
+.button:hover{
+    background-color: aliceblue;
+    color: #333;
+    transition: ease-in 0.2ms;
+    transform: rotate(20deg);
+    text-decoration: none;
+}
+
+#logo {
+    font-size: 36px;
+    margin-left: 25px;
+}
+
+#logo:hover{
+color: darkgreen;
+transform: rotate(15deg);
+transition: ease-out 0.3ms;
+}
+
+li{
+    list-style: none;
+    font-family: cursive;
+    font-size: 18px;
+}
+
+h2{
+    font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-size: 25px;
+}
+
+/* Style the artist containers */
+.specialContainer {
+    display:flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    justify-content: space-evenly;
+    font-family: fantasy;
+    max-height: 400px;
+    block-size: fit-content;
+    overflow:scroll ;
+    white-space: nowrap;
+    z-index: 1;
+
+  }
+  
+  .row {
+    text-align: center;
+    display: inline;
+    flex-direction: column;
+    align-items: center;
+    
+
+  }
+  
+
+  
+.container {
+    justify-content: center;
+    margin: 10px;
+    padding: 10px;
+    margin-left: 345px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    text-align: center;
+    background-color: #fff;
+    width: 1200px;
+    height: 780px;
+}
+
+.container a {
+    text-decoration: none;
+    color: #333;
+}
+
+/* Style the artist images and text */
+.imageContainer {
+    position: relative;
+}
+
+.image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+
+/* Add hover effect on artist containers */
+.container:hover {
+    background-color: #f0f0f0;
+    transform: scale(1.05);
+    transition: background-color 0.2s, transform 0.2s;
+}

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="../static/css/signup.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;700&family=Roboto+Mono:wght@200;400&display=swap" rel="stylesheet">
+        <title>Forum</title>
+    </head>
+    <body>
+
+        <!-- Background -->
+        <div class="bg"></div>
+        <div class="bg bg2"></div>
+        <div class="bg bg3"></div>
+        <!-- End of Background -->
+
+        <!-- Navigation Menu -->
+        <header>
+            <div class="logo_reg">
+                <ul class="logo">
+                    <li onclick="location.href='/'" class="logo_link">Forum</li>
+                </ul>
+                <ul class="signs">
+                    <li onclick="location.href='/sign-in'" class="sign_link">Sign in</li>
+                    <li onclick="location.href='/sign-up'" class="sign_link">Sign up</li>
+                </ul>
+            </div>
+        </header>
+        <!-- End of Navigation Menu -->
+
+        <!-- Form for sign up -->
+        <form action="/sign-up" method="post" class="sign_up">
+            <div class="title">Sign Up</div>
+            <div class="inputs_up">
+                <input id="FirstName" class="fn_input" name="firstName" type="text" placeholder="Enter your name">
+                <input id="LastName" class="ln_input" name="lastName" type="text" placeholder="Enter your last name">
+                <input id="Email" class="e_input" name="email" type="text" placeholder="*Enter your email" required>
+                <input id="Nickname" class="n_input" name="nickname" type="text" placeholder="*Enter you nickname" required>
+                <input id="Password" class="p_input" name="password" type="password" placeholder="*Enter your password" required>
+            </div>
+            <input class="signup_btn" type="submit" value="Sign Up">
+        </form>
+        <!-- End of Form -->
+
+        <!-- Footer -->
+        <footer>
+            <div class="authors">Development by Giorgi Koridze and Robert Juhkam</div>
+            <div class="year">2024</div>
+        </footer>
+        <!-- End of Footer -->
+
+        <!-- JS Scripts -->
+        {{ if .Exist }}
+        <script>
+                alert('{{ .Content }}')
+        </script>
+        {{ end }}
+        <!-- End of Scripts -->
+    </body>
+</html>

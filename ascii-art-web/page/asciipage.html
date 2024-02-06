@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ASCII Art</title>
+    <meta charset="UTF-8" />
+    <style>
+        body {
+            background-color: rgb(243, 231, 231);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh; /* Ensure the body takes up the full viewport height */
+            margin: 0; /* Remove default margin */
+        }
+
+        h1 {
+            color: blue;
+        }
+
+        #outputText {
+            width: 100%;
+            height: auto;
+            white-space: pre;
+            overflow-x: scroll;
+            resize: none;
+        }
+
+        button {
+            margin-top: 10px; /* Add some top margin to the button */
+        }
+    </style>
+</head>
+<body>
+    <h1>Ascii Art</h1>
+    <textarea readonly name="outputText" id="outputText" cols="90" rows="22">{{ .Result }}</textarea>
+    <br>
+    <button onclick="history.back()"><b>back</b></button>
+</body>
+</html>

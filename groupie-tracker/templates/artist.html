@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Groupie Tracker</title>
+    <link rel="stylesheet" href="/static/artist.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Alumni+Sans+Collegiate+One&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+      <div class="header">
+       <h1 id="logo">Artists</h1>
+        <a class="button" href="/">Back to homepage</a>
+      </div>
+    </header>
+    <div class="container">
+      <div >
+        <h1>{{.Artist.Name}}</h1>
+        <img
+          class="image"
+          src="{{.Artist.Image}}"
+          alt="{{.Artist.Name}} Image"
+        />
+      </div>
+      <br />
+      <fieldset class="specialContainer">
+        <div class="row">
+            <h2>Members:</h2>
+            <ul>
+                {{range .Artist.Members}}
+                <li>{{.}}</li>
+                {{end}}
+            </ul>
+        </div>
+        <div class="row">
+            <h2>Created in:</h2>
+            <p>{{.Artist.CreationDate}}</p>
+        </div>
+        <div class="row">
+            <h2>First album:</h2>
+            <p>{{.Artist.FirstAlbum}}</p>
+        </div>
+        <div class="row">
+            <h2>Tours</h2>
+            <ul>
+                {{range $date, $locations := .Relations.DatesLocations}}
+                <li>
+                    <strong>{{$date}}</strong>
+                    <ul>
+                        {{range $locations}}
+                        <li>{{.}}</li>
+                        {{end}}
+                    </ul>
+                </li>
+                {{end}}
+            </ul>
+        </div>
+    </fieldset>    
+    </div>
+  </body>
+</html>

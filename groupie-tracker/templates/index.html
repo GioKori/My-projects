@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Groupie Tracker</title>
+    <link rel="stylesheet" href="/static/index.css">
+    <link href="https://fonts.googleapis.com/css2?family=Alumni+Sans+Collegiate+One&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        <h1 id="logo">Groupie Tracker</h1>
+    </header>
+    <div class="artcontainer">
+        {{range .}}
+            <div class="container">
+                <a href="artist/{{.Id}}" data-id="{{.Id}}">
+                    <div class="imageContainer">
+                            <img class="image" id="band-image" src="{{.Image}}" alt="Band Image">
+                            <p class="specialText"><strong>{{.Name}}</strong></p>
+                    </div>
+                </a>
+            </div>
+        {{end}}
+    </div>
+</body>
+
+</html>

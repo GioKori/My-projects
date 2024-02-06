@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Converter of Fonts</title>
+</head>
+<body>
+    <style>
+          html, body {
+            margin: 0;
+            padding: 0;
+            height: 60%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+         h1 {
+            color: red;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            font-size: 40px;
+            line-height: 20px;
+        }
+   label {
+            display: inline-flex;
+            margin-right: 20px;
+            cursor: pointer;
+            position: relative;
+            padding-left: 20px;
+            width: 80px;
+        }
+textarea {
+            width: 900px;
+            height: 350px;
+        }
+  form {
+            display: flex;
+            flex-direction: column;
+            align-items:center;
+            justify-content: center;
+        }
+        
+    </style>
+    <h1>Ascii Art</h1>
+    <form method="POST" action="/ascii-art">
+        <textarea name="inputText" id="inputText" cols="48" rows="6" placeholder="Write your text here"></textarea>
+        <br>
+        <label for="font">Choose a font:</label>
+        <select name="font" id="font">
+            <option value="standard.txt">standard</option>
+            <option value="shadow.txt">shadow</option>
+            <option value="thinkertoy.txt">thinkertoy</option>
+        </select>
+        
+        
+        <button>Generate</button>
+    
+    </form>
+</div>
+</body>
+</html>

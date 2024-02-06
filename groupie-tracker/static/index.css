@@ -1,0 +1,85 @@
+body {
+    justify-content: center;
+    background: content-box radial-gradient(ellipse farthest-corner at 50% 50%, rgb(41, 2, 10) 69%, rgb(0, 0, 0) 100%);
+    text-align: center;
+}
+
+
+header {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+}
+
+#logo {
+    font-size: 36px;
+}
+
+/* Style the artist containers */
+.artcontainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    margin: 15px 5px;
+}
+
+.container {
+    width: calc(15.20% - 20px);
+    text-align: center;
+    background-color: #fff;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.container a {
+    text-decoration: none;
+    color: #333;
+}
+
+/* Style the artist images */
+.imageContainer {
+    position: relative;
+}
+
+.image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+/* Style the artist text */
+.specialText {
+    margin: 10px 0;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+/* Add hover effect on artist containers */
+.container:hover {
+    background-color: #f0f0f0;
+    transform: scale(1.05);
+    transition: background-color 0.2s, transform 0.2s;
+}
+
+@media (max-width: 768px) {
+    .artcontainer {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .container {
+        width: 80%;
+    }
+
+    .image {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .specialText {
+        font-size: 14px;
+    }
+}
