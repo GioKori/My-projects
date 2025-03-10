@@ -1,0 +1,114 @@
+version: '3.8'
+
+volumes:
+  api-gateway-logs:
+  inventory-database:
+  billing-database:
+
+
+networks:
+  microservices-net:
+
+
+services:
+
+  api-gateway:
+    container_name: api-gateway
+    build:
+      context: ./src/api-gateway/
+      dockerfile: Dockerfile
+    entrypoint: [ "./entrypoint.sh", "gateway" ]
+    volumes:
+      - api-gateway-logs:/root/.pm2/logs
+    networks:
+      - microservices-net
+    env_file:
+      - .env
+    ports:
+      - "${EXPRESS_PORT}:${EXPRESS_PORT}"
+    depends_on:
+      - rabbitmq-server
+    restart: "on-failure"
+
+  billing-app:
+    container_name: billing-app
+    build:
+      context: ./src/billing-app
+      dockerfile: Dockerfile
+    entrypoint: [ "./entrypoint.sh", "billing" ]
+    networks:
+      - microservices-net
+    depends_on:
+      - billing-app-db
+      - rabbitmq-server
+    restart: "on-failure"
+
+  inventory-app:
+    container_name: inventory-app
+    build:
+      context: ./src/inventory-app
+      dockerfile: Dockerfile
+    entrypoint: [ "./entrypoint.sh", "inventory" ]
+    networks:
+      - microservices-net
+    depends_on:
+      - inventory-app-db
+    restart: "on-failure"
+
+  billing-app-db:
+    container_name: billing-app-db
+    build:
+      context: .
+      dockerfile: Dockerfile.db
+    env_file:
+      - .env
+    entrypoint:
+      [
+        "./entrypoint_db.sh",
+        "${POSTGRES_USERNAME}",
+        "${POSTGRES_PASSWORD}",
+        "${BILLING_POSTGRES_DATABASE}"
+      ]
+    volumes:
+      - billing-database:/var/lib/postgresql/data
+    networks:
+      - microservices-net
+    restart: "on-failure"
+
+  inventory-app-db:
+    container_name: inventory-app-db
+    build:
+      context: .
+      dockerfile: Dockerfile.db
+    env_file:
+      - .env
+    entrypoint:
+      [
+        "./entrypoint_db.sh",
+        "${POSTGRES_USERNAME}",
+        "${POSTGRES_PASSWORD}",
+        "${INVENTORY_POSTGRES_DATABASE}"
+      ]
+    volumes:
+      - inventory-database:/var/lib/postgresql/data
+    networks:
+      - microservices-net
+    restart: "on-failure"
+
+  rabbitmq-server:
+    container_name: rabbitmq-server
+    build:
+      context: .
+      dockerfile: Dockerfile.rabbitmq
+    env_file:
+      - .env
+    entrypoint:
+      [
+        "./entrypoint_rabbitmq.sh",
+        "${RABBITMQ_USER}",
+        "${RABBITMQ_PASSWORD}",
+        "rabbitmq-server"
+      ]
+    networks:
+      - microservices-net
+    restart: "on-failure"
